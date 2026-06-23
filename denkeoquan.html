@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đèn Kéo Quân - Nguyễn Quốc Phong</title><style>
+body{
+    margin:0;
+    background:#111;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    color:white;
+}
+
+.scene{
+    width:300px;
+    height:300px;
+    perspective:1000px;
+}
+
+.carousel{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:spin 15s linear infinite;
+}
+
+.carousel:hover{
+    animation-play-state:paused;
+}
+
+.carousel img{
+    position:absolute;
+    width:180px;
+    height:240px;
+    object-fit:cover;
+    border:4px solid white;
+    border-radius:10px;
+    left:60px;
+    top:30px;
+}
+
+.carousel img:nth-child(1){transform:rotateY(0deg) translateZ(260px);}
+.carousel img:nth-child(2){transform:rotateY(60deg) translateZ(260px);}
+.carousel img:nth-child(3){transform:rotateY(120deg) translateZ(260px);}
+.carousel img:nth-child(4){transform:rotateY(180deg) translateZ(260px);}
+.carousel img:nth-child(5){transform:rotateY(240deg) translateZ(260px);}
+.carousel img:nth-child(6){transform:rotateY(300deg) translateZ(260px);}
+
+@keyframes spin{
+    from{transform:rotateY(0deg);}
+    to{transform:rotateY(360deg);}
+}
+
+.exam{
+    margin-top:50px;
+    text-align:center;
+}
+
+.exam img{
+    width:400px;
+    max-width:90%;
+    border:3px solid white;
+    border-radius:10px;
+}
+</style></head><body><h1>Đèn Kéo Quân - Nguyễn Quốc Phong</h1><div class="scene">
+    <div class="carousel">
+        <img src="images/anh1.jpg">
+        <img src="images/anh2.jpg">
+        <img src="images/anh3.jpg">
+        <img src="images/anh4.jpg">
+        <img src="images/anh5.jpg">
+        <img src="images/anh6.jpg">
+    </div>
+</div><div class="exam">
+    <h2>Kết quả bài tập 18</h2>
+    <img src="images/tracnghiem.jpg" alt="Bài tập 18">
+</div></body>
+</html>
