@@ -4,279 +4,372 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio - Nguyễn Quốc Phong</title>
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0d0d1a;
+  color: #e0e0e0;
+  line-height: 1.6;
 }
 
-body{
-font-family:Arial,sans-serif;
-line-height:1.6;
-background:#f4f4f4;
-color:#333;
-transition:.4s;
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(135deg, #1a0533 0%, #0d0d2b 60%, #0a1628 100%);
+  text-align: center;
+  padding: 50px 20px 40px;
+  border-bottom: 2px solid rgba(255,215,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 70%);
+}
+.avatar-wrap {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 4px solid #ffd700;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 30px rgba(255,215,0,0.3);
+  cursor: pointer;
+  position: relative;
+}
+.avatar-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+.avatar-wrap .avatar-placeholder {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  font-size:12px; color:#aaa; text-align:center; padding:10px;
+  background: #2a0a4a;
+}
+.avatar-wrap .avatar-placeholder span { font-size:36px; display:block; margin-bottom:6px; }
+.avatar-wrap:hover::after {
+  content: '📷 Đổi ảnh';
+  position: absolute; inset:0;
+  background: rgba(0,0,0,0.55);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:#ffd700; font-weight:bold;
+  border-radius:50%;
+}
+.avatar-wrap:hover { border-color: #ff8c00; }
+header h1 {
+  font-size: 2rem; font-weight: 700;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+header p { color: #c9a0ff; font-size: 0.95rem; }
+.dark-btn {
+  margin-top: 18px;
+  padding: 8px 22px;
+  border: 1px solid #ffd700;
+  background: transparent;
+  color: #ffd700;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background .2s;
+}
+.dark-btn:hover { background: rgba(255,215,0,0.1); }
+
+/* ===== NAV ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(10px);
+}
+nav a {
+  text-decoration: none;
+  color: #c9a0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 16px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+nav a:hover { background: rgba(255,215,0,0.12); color: #ffd700; }
+nav a.special {
+  background: linear-gradient(90deg,#ffd700,#ff8c00);
+  color: #000 !important;
+  font-weight: 700;
 }
 
-.dark{
-background:#121212;
-color:white;
+/* ===== SECTIONS ===== */
+section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+section h2 {
+  font-size: 1.4rem;
+  color: #ffd700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255,215,0,0.2);
+  display: inline-block;
 }
 
-header{
-background:#0077ff;
-color:white;
-text-align:center;
-padding:40px 20px;
+/* ABOUT */
+#about p { color: #ccc; font-size: 1rem; max-width: 650px; }
+
+/* SKILLS */
+.skills-list {
+  display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px;
+}
+.skill-tag {
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.3);
+  color: #ffd700;
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-header img{
-width:180px;
-height:180px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid white;
+/* PROJECTS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 20px; margin-top: 10px;
+}
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 22px;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,215,0,0.4);
+  box-shadow: 0 8px 30px rgba(255,215,0,0.1);
+}
+.card-icon { font-size: 2rem; margin-bottom: 10px; }
+.card h3 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
+.card p { color: #999; font-size: 0.85rem; }
+
+/* BAITAP 18 */
+#baitap18 img {
+  width: 100%; max-width: 860px;
+  border-radius: 14px;
+  border: 2px solid rgba(255,215,0,0.3);
+  margin-top: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-nav{
-display:flex;
-justify-content:center;
-gap:20px;
-padding:15px;
-background:#eaeaea;
-flex-wrap:wrap;
+/* CONTACT */
+#contact p { color: #ccc; margin-bottom: 6px; }
+#contact a { color: #ffd700; text-decoration: none; }
+form {
+  display: flex; flex-direction: column; gap: 12px;
+  max-width: 560px; margin-top: 20px;
+}
+input, textarea {
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: #fff; font-size: 0.95rem;
+  transition: border-color .2s;
+}
+input:focus, textarea:focus {
+  outline: none; border-color: #ffd700;
+}
+input::placeholder, textarea::placeholder { color: #666; }
+button[type=submit] {
+  padding: 12px;
+  background: linear-gradient(90deg,#ffd700,#ff8c00);
+  border: none; border-radius: 10px;
+  color: #000; font-weight: 700;
+  font-size: 1rem; cursor: pointer;
+  transition: opacity .2s;
+}
+button[type=submit]:hover { opacity: .85; }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 24px;
+  background: rgba(0,0,0,0.3);
+  color: #555; font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-.dark nav{
-background:#1d1d1d;
+/* LIGHT MODE */
+body.light {
+  background: #f4f4f4; color: #222;
 }
+body.light header {
+  background: linear-gradient(135deg,#4a00a0,#0056b3);
+}
+body.light nav {
+  background: rgba(0,0,0,0.06);
+}
+body.light nav a { color: #333; }
+body.light .card {
+  background: white;
+  border-color: rgba(0,0,0,0.08);
+}
+body.light input, body.light textarea {
+  background: white; border-color: #ccc; color: #222;
+}
+body.light input::placeholder, body.light textarea::placeholder { color: #aaa; }
+body.light footer { background: #222; color: #aaa; }
 
-nav a{
-text-decoration:none;
-font-weight:bold;
-color:#333;
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
 }
-
-.dark nav a{
-color:white;
-}
-
-section{
-max-width:1000px;
-margin:auto;
-padding:40px 20px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.dark .card{
-background:#1e1e1e;
-}
-
-form{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-input,textarea{
-padding:12px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-button{
-padding:12px;
-border:none;
-border-radius:6px;
-background:#0077ff;
-color:white;
-cursor:pointer;
-}
-
-footer{
-text-align:center;
-padding:20px;
-background:#0077ff;
-color:white;
-}
-
-.hidden{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.show{
-opacity:1;
-transform:translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
-
 <body>
 
 <header>
-    <img src="images/avatar.jpg" alt="Ảnh cá nhân">
-
-    <h1>Nguyễn Quốc Phong</h1>
-
-    <p>Sinh viên Công nghệ thông tin - Nhà phát triển Web & AI</p>
-
-    <br>
-
-    <button onclick="toggleDarkMode()">
-        🌙 Dark Mode
-    </button>
+  <div class="avatar-wrap" onclick="document.getElementById('avatarInput').click()" title="Click để chọn ảnh đại diện">
+    <div class="avatar-placeholder" id="avatarPh">
+      <span>👤</span>Click chọn<br>ảnh đại diện
+    </div>
+    <img id="avatarImg" src="" alt="Avatar" style="display:none">
+  </div>
+  <input type="file" id="avatarInput" accept="image/*" style="display:none">
+  <h1>Nguyễn Quốc Phong</h1>
+  <p>Sinh viên Công nghệ thông tin · Nhà phát triển Web & AI</p>
+  <button class="dark-btn" onclick="toggleMode()">🌙 Chế độ sáng/tối</button>
 </header>
 
 <nav>
-    <a href="#about">Giới thiệu</a>
-    <a href="#skills">Kỹ năng</a>
-    <a href="#projects">Projects</a>
-    <a href="#baitap18">Bài tập 18</a>
-    <a href="denkeoquan.html">Đèn Kéo Quân</a>
-    <a href="#contact">Liên hệ</a>
+  <a href="#about">Giới thiệu</a>
+  <a href="#skills">Kỹ năng</a>
+  <a href="#projects">Projects</a>
+  <a href="#baitap18">Bài tập 18</a>
+  <a href="denkeoquan.html" class="special">🏮 Đèn Kéo Quân</a>
+  <a href="#contact">Liên hệ</a>
 </nav>
-  
-<section id="about" class="hidden">
-<h2>Giới thiệu</h2>
-<p>
-Xin chào! Tôi là Nguyễn Quốc Phong, sinh viên ngành Công nghệ thông tin.
-Tôi yêu thích lập trình Web, AI và phát triển ứng dụng.
-</p>
+
+<section id="about" class="reveal">
+  <h2>👋 Giới thiệu</h2>
+  <div style="max-width:680px; display:flex; flex-direction:column; gap:14px;">
+    <p>Xin chào! Tôi là <strong style="color:#ffd700">Nguyễn Quốc Phong</strong>, sinh viên ngành Công nghệ thông tin. Hiện tại tôi đang là <strong style="color:#c9a0ff">sinh viên năm 3</strong> tại <strong style="color:#c9a0ff">Trường Đại Học Văn Hiến</strong>.</p>
+    <p>Tôi yêu thích lập trình Web, AI và phát triển ứng dụng. Luôn tìm kiếm cơ hội học hỏi và sáng tạo trong lĩnh vực công nghệ.</p>
+    <div style="background:rgba(255,215,0,0.06); border-left:4px solid #ffd700; border-radius:0 12px 12px 0; padding:16px 20px; margin-top:4px;">
+      <p style="color:#ffd700; font-weight:700; margin-bottom:6px;">🎓 Lời cảm ơn</p>
+      <p style="color:#ccc;">Để có được trang web này, tôi đã học và thực hành theo hướng dẫn của <strong style="color:#ffd700">Thầy Nguyễn Quang Tấn</strong> trong môn <em>Lập Trình Web</em>. Em xin chân thành cảm ơn Thầy! 🙏</p>
+    </div>
+  </div>
 </section>
 
-<section id="skills" class="hidden">
-<h2>Kỹ năng</h2>
-<ul>
-<li>HTML5</li>
-<li>CSS3</li>
-<li>JavaScript</li>
-<li>Bootstrap</li>
-<li>Java</li>
-<li>C++</li>
-</ul>
+<section id="skills" class="reveal">
+  <h2>🛠️ Kỹ năng</h2>
+  <div class="skills-list">
+    <span class="skill-tag">HTML5</span>
+    <span class="skill-tag">CSS3</span>
+    <span class="skill-tag">JavaScript</span>
+    <span class="skill-tag">Bootstrap</span>
+    <span class="skill-tag">Java</span>
+    <span class="skill-tag">C++</span>
+  </div>
 </section>
 
-<section id="projects" class="hidden">
-<h2>Projects</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Website cung ứng nhân lực</h3>
-<p>Kết nối lao động và doanh nghiệp.</p>
-</div>
-
-<div class="card">
-<h3>AI Chatbot</h3>
-<p>Trợ lý ảo thông minh hỗ trợ nhiều lĩnh vực.</p>
-</div>
-
-<div class="card">
-<h3>Portfolio Website</h3>
-<p>Website giới thiệu bản thân.</p>
-</div>
-
-<div class="card">
-<h3>Game 3D C++</h3>
-<p>Game nhập vai nâng cấp trang bị.</p>
-</div>
-
-<div class="card">
-<h3>App thông báo chuyển khoản</h3>
-<p>Thông báo giao dịch qua Bluetooth.</p>
-</div>
-
-<div class="card">
-<h3>Robot Mini AI</h3>
-<p>Robot điều khiển từ xa nhận diện giọng nói.</p>
-</div>
-
-</div>
-</section>
-  <section id="baitap18" class="hidden">
-
-<h2>Kết quả bài tập 18</h2>
-
-<p>
-Hình ảnh kết quả bài tập trắc nghiệm.
-</p>
-
-<br>
-
-<img src="images/baitap18.png"
-     alt="Bài tập 18"
-     style="width:100%;max-width:900px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,.2);">
-
+<section id="projects" class="reveal">
+  <h2>🚀 Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h3>Website cung ứng nhân lực</h3>
+      <p>Kết nối lao động và doanh nghiệp.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h3>AI Chatbot</h3>
+      <p>Trợ lý ảo thông minh hỗ trợ nhiều lĩnh vực.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💼</div>
+      <h3>Portfolio Website</h3>
+      <p>Website giới thiệu bản thân.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3>Game 3D C++</h3>
+      <p>Game nhập vai nâng cấp trang bị.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📲</div>
+      <h3>App thông báo chuyển khoản</h3>
+      <p>Thông báo giao dịch qua Bluetooth.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🦾</div>
+      <h3>Robot Mini AI</h3>
+      <p>Robot điều khiển từ xa nhận diện giọng nói.</p>
+    </div>
+  </div>
 </section>
 
-<section id="contact" class="hidden">
+<section id="baitap18" class="reveal">
+  <h2>📋 Kết quả Bài tập 18</h2>
+  <p style="color:#999;margin-bottom:8px">Hình ảnh kết quả bài tập trắc nghiệm.</p>
+  <img src="images/baitap18.png" alt="Bài tập 18">
+</section>
 
-<h2>Liên hệ</h2>
-
-<p>Email: phongnguyen62449@gmail.com</p>
-
-<p>Số điện thoại: 0378104680</p>
-
-<br>
-
-<form>
-
-<input type="text" placeholder="Họ và tên">
-
-<input type="email" placeholder="Email">
-
-<textarea rows="5" placeholder="Nội dung"></textarea>
-
-<button type="submit">
-Gửi liên hệ
-</button>
-
-</form>
-
+<section id="contact" class="reveal">
+  <h2>📬 Liên hệ</h2>
+  <p>📧 Email: <a href="mailto:phongnguyen62449@gmail.com">phongnguyen62449@gmail.com</a></p>
+  <p>📞 Số điện thoại: <a href="tel:0378104680">0378104680</a></p>
+  <form onsubmit="return false">
+    <input type="text" placeholder="Họ và tên">
+    <input type="email" placeholder="Email của bạn">
+    <textarea rows="5" placeholder="Nội dung tin nhắn..."></textarea>
+    <button type="submit">Gửi liên hệ ✉️</button>
+  </form>
 </section>
 
 <footer>
-<p>© 2026 Nguyễn Quốc Phong</p>
+  <p>© 2026 Nguyễn Quốc Phong · Sinh viên CNTT</p>
 </footer>
 
 <script>
-function toggleDarkMode(){
-document.body.classList.toggle("dark");
+// Avatar upload
+document.getElementById('avatarInput').addEventListener('change', function() {
+  if (!this.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = document.getElementById('avatarImg');
+    var ph  = document.getElementById('avatarPh');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    ph.style.display  = 'none';
+  };
+  reader.readAsDataURL(this.files[0]);
+});
+
+// Toggle sáng/tối
+function toggleMode() {
+  document.body.classList.toggle('light');
 }
 
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
-
-document.querySelectorAll(".hidden").forEach(el=>{
-observer.observe(el);
-});
+// Scroll reveal
+var reveals = document.querySelectorAll('.reveal');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(function(el) { observer.observe(el); });
 </script>
-
 </body>
 </html>
