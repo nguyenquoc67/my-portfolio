@@ -25,10 +25,7 @@ body {
   border:3px solid #ffd700;
   overflow:hidden;
   margin:0 auto 12px;
-  background:#2a0a4a;
-  cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  font-size:13px; color:#aaa; text-align:center;
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
 }
 .avatar-circle img { width:100%; height:100%; object-fit:cover; }
 h1 {
@@ -39,45 +36,18 @@ h1 {
 .header p { color:#c9a0ff; font-size:0.85rem; margin-top:4px; }
 
 .back-link {
-  display:inline-block; margin:10px 0 20px;
+  display:inline-block; margin:10px 0 24px;
   color:#ffd700; text-decoration:none;
   border:1px solid #ffd700; padding:5px 16px;
-  border-radius:20px;
+  border-radius:20px; transition:background .2s;
 }
-
-/* UPLOAD PANEL */
-.upload-panel {
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,215,0,0.3);
-  border-radius:16px; padding:20px;
-  margin-bottom:30px; width:100%; max-width:700px;
-  text-align:center;
-}
-.upload-panel h3 { color:#ffd700; margin-bottom:14px; }
-.upload-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px; margin-bottom:10px;
-}
-.slot {
-  aspect-ratio:3/4;
-  border:2px dashed rgba(255,215,0,0.4);
-  border-radius:10px;
-  background:rgba(255,255,255,0.03);
-  cursor:pointer;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  font-size:12px; color:#999;
-  overflow:hidden;
-  transition:border-color .2s;
-}
-.slot:hover { border-color:#ffd700; }
-.slot img { width:100%; height:100%; object-fit:cover; }
-.slot .plus { font-size:28px; display:block; margin-bottom:4px; }
-.hint { font-size:11px; color:#888; }
+.back-link:hover { background:rgba(255,215,0,.12); }
 
 /* ĐÈN */
-.lamp-title { color:#ffd700; font-size:1.1rem; margin-bottom:14px; text-align:center; }
+.lamp-title {
+  color:#ffd700; font-size:1.15rem;
+  margin-bottom:14px; text-align:center; letter-spacing:1px;
+}
 .scene {
   width:360px; height:360px;
   perspective:1000px;
@@ -89,20 +59,18 @@ h1 {
   transform-style:preserve-3d;
   animation:spin 12s linear infinite;
 }
-.carousel.paused { animation-play-state:paused; }
+.carousel:hover { animation-play-state:paused; }
 .face {
   position:absolute;
-  width:160px; height:210px;
-  left:100px; top:75px;
+  width:160px; height:215px;
+  left:100px; top:72px;
   border:3px solid #ffd700;
   border-radius:12px;
   overflow:hidden;
   background:#1a0533;
-  box-shadow:0 0 18px rgba(255,215,0,0.3);
-  display:flex; align-items:center; justify-content:center;
-  font-size:12px; color:#555; text-align:center;
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
 }
-.face img { width:100%; height:100%; object-fit:cover; }
+.face img { width:100%; height:100%; object-fit:cover; display:block; }
 .face:nth-child(1){transform:rotateY(0deg)   translateZ(250px);}
 .face:nth-child(2){transform:rotateY(60deg)  translateZ(250px);}
 .face:nth-child(3){transform:rotateY(120deg) translateZ(250px);}
@@ -111,11 +79,12 @@ h1 {
 .face:nth-child(6){transform:rotateY(300deg) translateZ(250px);}
 @keyframes spin { from{transform:rotateY(0deg);} to{transform:rotateY(360deg);} }
 
-.glow { width:360px; height:20px; margin:-8px auto 0;
+.glow {
+  width:360px; height:20px; margin:-8px auto 0;
   background:radial-gradient(ellipse,rgba(255,215,0,0.2) 0%,transparent 70%);
   filter:blur(6px);
 }
-.hover-hint { text-align:center; color:#777; font-size:12px; margin-top:8px; margin-bottom:30px; }
+.hover-hint { text-align:center; color:#777; font-size:12px; margin-top:10px; margin-bottom:36px; }
 
 /* QUIZ */
 .quiz-section {
@@ -124,138 +93,46 @@ h1 {
   border:1px solid rgba(255,215,0,0.2);
   border-radius:16px; padding:24px; text-align:center;
 }
-.quiz-section h2 { color:#ffd700; margin-bottom:16px; }
-.quiz-drop {
-  border:2px dashed rgba(255,215,0,0.4);
-  border-radius:12px; padding:30px;
-  cursor:pointer; background:rgba(255,255,255,0.02);
-  transition:background .2s;
+.quiz-section h2 { color:#ffd700; font-size:1.1rem; margin-bottom:16px; }
+.quiz-section img {
+  width:100%; max-width:600px;
+  border-radius:12px;
+  border:2px solid rgba(255,215,0,0.4);
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
-.quiz-drop:hover { background:rgba(255,215,0,0.05); border-color:#ffd700; }
-.quiz-drop .icon { font-size:40px; display:block; margin-bottom:8px; }
-.quiz-drop p { color:#999; font-size:13px; }
-#quizImg { width:100%; max-width:600px; border-radius:12px; border:2px solid #ffd700; margin-top:16px; display:none; }
-
-/* ẨN input file */
-input[type=file] { display:none; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
-  <div class="avatar-circle" id="avatarCircle" onclick="document.getElementById('avatarFile').click()">
-    👤<br>Click chọn<br>avatar
+  <div class="avatar-circle">
+    <img src="images/avatar.jpg" alt="Nguyễn Quốc Phong">
   </div>
   <h1>Nguyễn Quốc Phong</h1>
   <p>Sinh viên Công nghệ thông tin · Web & AI Developer</p>
 </div>
-<input type="file" id="avatarFile" accept="image/*">
 
 <a href="index.html" class="back-link">← Về Portfolio</a>
 
-<!-- UPLOAD -->
-<div class="upload-panel">
-  <h3>📸 Chọn 6 ảnh cho Đèn Kéo Quân</h3>
-  <div class="upload-grid" id="grid"></div>
-  <p class="hint">Click vào từng ô để chọn ảnh từ máy tính</p>
-</div>
-<!-- 6 input ẩn -->
-<input type="file" id="f0" accept="image/*">
-<input type="file" id="f1" accept="image/*">
-<input type="file" id="f2" accept="image/*">
-<input type="file" id="f3" accept="image/*">
-<input type="file" id="f4" accept="image/*">
-<input type="file" id="f5" accept="image/*">
-
-<!-- ĐÈN -->
 <p class="lamp-title">🏮 Đèn Kéo Quân 3D</p>
 <div class="scene">
-  <div class="carousel" id="carousel">
-    <div class="face" id="face0">🖼️<br>Ảnh 1</div>
-    <div class="face" id="face1">🖼️<br>Ảnh 2</div>
-    <div class="face" id="face2">🖼️<br>Ảnh 3</div>
-    <div class="face" id="face3">🖼️<br>Ảnh 4</div>
-    <div class="face" id="face4">🖼️<br>Ảnh 5</div>
-    <div class="face" id="face5">🖼️<br>Ảnh 6</div>
+  <div class="carousel">
+    <div class="face"><img src="images/h1.jpg" alt="Ảnh 1"></div>
+    <div class="face"><img src="images/h2.jpg" alt="Ảnh 2"></div>
+    <div class="face"><img src="images/h3.jpg" alt="Ảnh 3"></div>
+    <div class="face"><img src="images/h4.jpg" alt="Ảnh 4"></div>
+    <div class="face"><img src="images/h5.jpg" alt="Ảnh 5"></div>
+    <div class="face"><img src="images/h6.jpg" alt="Ảnh 6"></div>
   </div>
 </div>
 <div class="glow"></div>
 <p class="hover-hint">Rê chuột vào đèn để dừng · Di ra để quay tiếp</p>
 
-<!-- QUIZ -->
 <div class="quiz-section">
-  <h2>📋 Kết quả Bài tập 18</h2>
-  <div class="quiz-drop" id="quizDrop" onclick="document.getElementById('quizFile').click()">
-    <span class="icon">🖼️</span>
-    <p>Click để chọn hình kết quả bài tập 18</p>
-  </div>
-  <img id="quizImg" alt="Bài tập 18">
+  <h2>📋 Kết quả Bài tập 18 (Trắc nghiệm)</h2>
+  <img src="images/baitap18.png" alt="Kết quả bài tập 18"
+       onerror="this.src='images/baitap18.jpg'">
 </div>
-<input type="file" id="quizFile" accept="image/*">
 
-<script>
-// Tạo 6 ô slot
-var grid = document.getElementById('grid');
-for (var i = 0; i < 6; i++) {
-  var div = document.createElement('div');
-  div.className = 'slot';
-  div.id = 'slot' + i;
-  div.innerHTML = '<span class="plus">＋</span>Ảnh ' + (i+1);
-  div.setAttribute('data-idx', i);
-  div.onclick = (function(idx){
-    return function(){ document.getElementById('f'+idx).click(); };
-  })(i);
-  grid.appendChild(div);
-}
-
-// Đọc ảnh chung
-function readFile(file, callback) {
-  var reader = new FileReader();
-  reader.onload = function(e){ callback(e.target.result); };
-  reader.readAsDataURL(file);
-}
-
-// 6 ảnh đèn
-for (var j = 0; j < 6; j++) {
-  (function(idx){
-    document.getElementById('f'+idx).addEventListener('change', function(){
-      if (!this.files[0]) return;
-      readFile(this.files[0], function(url){
-        // Slot
-        var slot = document.getElementById('slot'+idx);
-        slot.innerHTML = '<img src="'+url+'">';
-        // Mặt đèn
-        var face = document.getElementById('face'+idx);
-        face.innerHTML = '<img src="'+url+'">';
-      });
-    });
-  })(j);
-}
-
-// Avatar
-document.getElementById('avatarFile').addEventListener('change', function(){
-  if (!this.files[0]) return;
-  readFile(this.files[0], function(url){
-    document.getElementById('avatarCircle').innerHTML = '<img src="'+url+'">';
-  });
-});
-
-// Quiz
-document.getElementById('quizFile').addEventListener('change', function(){
-  if (!this.files[0]) return;
-  readFile(this.files[0], function(url){
-    document.getElementById('quizDrop').style.display = 'none';
-    var img = document.getElementById('quizImg');
-    img.src = url;
-    img.style.display = 'block';
-  });
-});
-
-// Hover dừng đèn
-var carousel = document.getElementById('carousel');
-carousel.addEventListener('mouseenter', function(){ this.style.animationPlayState='paused'; });
-carousel.addEventListener('mouseleave', function(){ this.style.animationPlayState='running'; });
-</script>
 </body>
 </html>
